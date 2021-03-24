@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Ajax</title>
+  </head>
+  <body>
+    <button onclick="getRepos()">Get Repos</button>
+    <a
+      href="https://www.youtube.com/watch?v=MaE4Yossouw&list=PLDoPjvoNmBAytfRIdMIkLeoQHP0o5uWBa&index=3"
+      target="blank"
+      >Video Of The Course</a
+    >
+    <script>
+      // Make function to do the request
+      function getRepos() {
+        // Assign the request object to variable
+        // XMLHttpRequest => It is an object exchange data with server in background
+        var myRequest = new XMLHttpRequest();
+
+        // On ready state change => Function called when ready state change
+        myRequest.onreadystatechange = function () {
+          console.log(this.status);
+          /*
+            Ready State => The status of the request
+            [0] Request is not initialized.
+            [1] Server connection is established.
+            [2] Request is recieved.
+            [3] Processing request.
+            [4] Request is finished & response is ready.
+            Status => Response status code [200 => Ok]
+          */
+
+          // If request is finished & response is ready & status code is 200 (Ok) => get rsponse text
+          if (this.readyState === 4 && this.status === 200) {
+            console.log(this.responseText);
+          }
+        };
+
+        myRequest.open(
+          "GET",
+          "https://api.github.com/users/ElzeroWebSchool/repos",
+          true
+        );
+        myRequest.send();
+      }
+    </script>
+  </body>
+</html>
